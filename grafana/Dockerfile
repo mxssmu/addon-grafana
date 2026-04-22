@@ -24,7 +24,7 @@ RUN \
         musl \
         nginx \
     \
-    && dpkg --install /tmp/grafana.deb \
+    && apt-get install -y /tmp/grafana.deb \
     \
     && if [ "${BUILD_ARCH}" = "amd64" ]; then \
         apt-get install -y --no-install-recommends \
@@ -50,7 +50,7 @@ RUN \
             libxshmfence1 \
             libxss1 \
             libxtst6 \
-        && grafana-cli plugins install "grafana-image-renderer" "${GRAFANA_IMAGE_RENDERER_VERSION#v}"; \
+        && grafana-cli plugins install "grafana-image-renderer" "${GRAFANA_IMAGE_RENDERER_VERSION#v}" || true; \
     fi \
     \
     && rm -fr \
